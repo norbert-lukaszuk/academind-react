@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Person from "./Person";
+import { v4 as uuid } from "uuid";
 
 export default class App extends Component {
   state = {
@@ -12,25 +13,40 @@ export default class App extends Component {
   };
 
   buttonClickHandler = () => {
-    this.setState({
-      persons: [
-        { name: "Ewelina", age: 25 },
-        { name: "Tamara", age: 63 },
-        { name: "Borys", age: 13 },
-      ],
+    this.setState((prevState) => {
+      const updatedState = prevState.persons.map((person) => {
+        if (person.name === "Jan") {
+          person.name = "Tomasz";
+        }
+        // else if (person.name === "Tomasz") {
+        //   person.name = "Jan";
+        // }
+        return person;
+      });
+      return {
+        persons: updatedState,
+      };
     });
   };
   nameCLickHandler = (newName) => {
-    this.setState({
-      persons: [
-        { name: newName, age: 25 },
-        { name: "Tamara", age: 63 },
-      ],
+    // persons: [
+    //   { name: newName, age: 25 },
+    //   { name: "Tamara", age: 63 },
+    // ],
+    this.setState((prevState) => {
+      return {
+        // persons: [(prevState.persons[0]: { name: newName, age: 25 })],
+      };
     });
   };
   addUserHandler = () => {
-    this.setState({
-      persons: [...this.state.persons, { name: "Alex", age: 56 }],
+    // this.setState({
+    //   persons: [...this.state.persons, { name: "Alex", age: 56 }],
+    // });
+    this.setState((prevState) => {
+      return {
+        persons: [...prevState.persons, { name: "Alex", age: 56 }],
+      };
     });
   };
   render() {
@@ -40,15 +56,11 @@ export default class App extends Component {
         <h3>Hello React!</h3>
         <button onClick={this.buttonClickHandler}>Change Name</button>
         <button onClick={this.addUserHandler}>Add user</button>
-        <Person
-          personName={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-        />
-        <Person
-          personName={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.nameCLickHandler.bind(this, "Maciek")}
-        />
+        {this.state.persons.map((person) => {
+          return (
+            <Person key={uuid()} personName={person.name} age={person.age} />
+          );
+        })}
       </div>
     );
   }
