@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Person from "./Person";
+import Person from "./components/Person";
 import { v4 as uuid } from "uuid";
 
 export default class App extends Component {
@@ -57,27 +57,22 @@ export default class App extends Component {
       };
     });
   };
-  inputNameHandler = (e) => {
+  inputNameHandler = (e, index) => {
     const updatedValue = e.target.value;
-    this.setState((prevState) => {
-      const update = prevState.persons.map((person) => {
-        if (e.target.name === person.id) {
-          console.log(person.name);
-        }
-        return person;
-      });
-    });
+    let persons = [...this.state.persons];
+    persons[index].name = updatedValue;
+    this.setState({ persons: persons });
   };
   render() {
     console.log(this.state);
-    const PersonsList = this.state.persons.map((person) => {
+    const PersonsList = this.state.persons.map((person, index) => {
       return (
         <Person
           key={person.id}
           id={person.id}
           personName={person.name}
           age={person.age}
-          inputNameHandler={this.inputNameHandler}
+          inputNameHandler={(e) => this.inputNameHandler(e, index)}
         />
       );
     });
