@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Person from "./components/Person";
 import { v4 as uuid } from "uuid";
+import CharCount from "./components/CharCount";
+import SingleChar from "./components/SingleChar";
 
 export default class App extends Component {
   state = {
@@ -11,8 +13,22 @@ export default class App extends Component {
     ],
     newPerson: { name: "Bogdan", age: 40 },
     listIsShowing: true,
+    charSet: [],
+    charCount: 0,
   };
-
+  inputHandler = (e) => {
+    const input = e.target.value.split("");
+    let setCharSet = [...this.state.charSet];
+    setCharSet = [...input];
+    let setCount = setCharSet.length;
+    this.setState({ charSet: setCharSet, charCount: setCount });
+  };
+  deleteCharHandler = (charIndex) => {
+    let setChars = [...this.state.charSet];
+    setChars.splice(charIndex, 1);
+    this.setState({ charSet: setChars });
+    console.log(setChars);
+  };
   buttonClickHandler = () => {
     this.setState((prevState) => {
       const updatedState = prevState.persons.map((person) => {
@@ -83,6 +99,22 @@ export default class App extends Component {
         <button onClick={this.addUserHandler}>Add user</button>
         <button onClick={this.showListHandler}>Show/hide list</button>
         {this.state.listIsShowing ? PersonsList : null}
+        <h3>Dynamic lists and conditional rendering</h3>
+        <input
+          type="text"
+          onChange={this.inputHandler}
+          value={this.state.charSet.join("")}
+        />
+        <CharCount count={this.state.charCount} />
+        {this.state.charSet.map((char, index) => {
+          return (
+            <SingleChar
+              char={char}
+              key={index}
+              deleteCharHandler={() => this.deleteCharHandler(index)}
+            />
+          );
+        })}
       </div>
     );
   }
