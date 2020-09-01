@@ -99,8 +99,12 @@ export default class App extends Component {
         <button className={classes.button} onClick={this.buttonClickHandler}>
           Change Name
         </button>
-        <button onClick={this.addUserHandler}>Add user</button>
-        <button onClick={this.showListHandler}>Show/hide list</button>
+        <button className={classes.button} onClick={this.addUserHandler}>
+          Add user
+        </button>
+        <button className={classes.button} onClick={this.showListHandler}>
+          Show/hide list
+        </button>
         {this.state.listIsShowing ? PersonsList : null}
         <h3>Dynamic lists and conditional rendering</h3>
         <input

@@ -1,4 +1,16 @@
 .button {
-  color: green;
+  color: #f8edeb;
   background: none;
+  border: none;
+  padding: 5px;
+  border-radius: 5px 2px 5px 2px;
+  background: linear-gradient(45deg, #48bfe3, #56cfe1);
+  cursor: pointer;
+  transition: all 0.1s ease-in;
+  margin-right: 10px;
+}
+.button:hover {
+  /* color: royalblue; */
+  background: linear-gradient(45deg, #7400b8, #56cfe1);
+  transform: scale(0.98);
 }
