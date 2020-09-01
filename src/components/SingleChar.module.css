@@ -1,0 +1,17 @@
+.singleChar {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.singleChar:hover {
+  background-color: #aaa;
+  transform: scale(0.9);
+}
+.space {
+  margin-left: 5px;
+  padding: 10px;
+}

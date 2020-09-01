@@ -82,6 +82,14 @@ export default class App extends Component {
   };
   render() {
     console.log(this.state);
+    // get state.listIsShowing to check if
+    let listIsShowing = this.state.listIsShowing;
+    // load default class to the button
+    let listButtonClasses = [classes.button];
+    // check if the list is presesnt and change styling of the button
+    if (listIsShowing) {
+      listButtonClasses.push(classes.listIsShowing);
+    }
     const PersonsList = this.state.persons.map((person, index) => {
       return (
         <Person
@@ -102,7 +110,10 @@ export default class App extends Component {
         <button className={classes.button} onClick={this.addUserHandler}>
           Add user
         </button>
-        <button className={classes.button} onClick={this.showListHandler}>
+        <button
+          className={listButtonClasses.join(" ")}
+          onClick={this.showListHandler}
+        >
           Show/hide list
         </button>
         {this.state.listIsShowing ? PersonsList : null}

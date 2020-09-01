@@ -14,3 +14,6 @@
   background: linear-gradient(45deg, #7400b8, #56cfe1);
   transform: scale(0.98);
 }
+.listIsShowing {
+  background: linear-gradient(45deg, #d62828, #f77f00);
+}
