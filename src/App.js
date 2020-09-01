@@ -3,6 +3,7 @@ import Person from "./components/Person";
 import { v4 as uuid } from "uuid";
 import CharCount from "./components/CharCount";
 import SingleChar from "./components/SingleChar";
+import classes from "./App.module.css";
 
 export default class App extends Component {
   state = {
@@ -95,7 +96,9 @@ export default class App extends Component {
     return (
       <div>
         <h3>Hello React!</h3>
-        <button onClick={this.buttonClickHandler}>Change Name</button>
+        <button className={classes.button} onClick={this.buttonClickHandler}>
+          Change Name
+        </button>
         <button onClick={this.addUserHandler}>Add user</button>
         <button onClick={this.showListHandler}>Show/hide list</button>
         {this.state.listIsShowing ? PersonsList : null}
